@@ -8,8 +8,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start:dev": "nodemon --watch ./src --ext ts,js --exec \"yarn run ts-node\" ",
-    "ts-node": "ts-node ./src/index.ts",
+    "start:dev": "nodemon --watch ./src --ext ts,js --exec \"yarn run tsx\" ",
+    "tsx": "tsx ./src/index.ts",
     "prettier": "prettier --write src/**/*.ts",
     "lint": "eslint src --ext ts,js --fix --max-warnings=0",
     "postinstall": "husky install",
@@ -28,6 +28,7 @@
     "nodemon": "^3.1.0",
     "prettier": "3.2.5",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.2",
     "typescript": "^5.4.2"
   },
   "dependencies": {
