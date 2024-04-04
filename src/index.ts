@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import studentsRouter from './students/studentsRouter';
+import studentsRouter from './students/studentsRouter.ts';
 dotenv.config();
 
 const app = express();

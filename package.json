@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A school system for registering students,staff and parents",
   "main": "src/index.ts",
+  "type": "module",
   "author": "McCarthy <mccarthymutebi10@gmail.com>",
   "license": "MIT",
   "private": true,
