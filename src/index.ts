@@ -1,12 +1,13 @@
 import express from 'express';
+import 'colors';
 import dotenv from 'dotenv';
 dotenv.config();
 import studentsRouter from './routes/studentsRouter.ts';
 import { checkDataField, genericErrorMiddleware } from './middleware/errorHandling.ts';
-import { connectToLocalDB } from './utilities/utilities.ts';
 import { createStudent } from './models/student-model/studentModel.ts';
+import { initialiseLocalDb } from './config/config.ts';
 
-connectToLocalDB();
+initialiseLocalDb();
 
 createStudent({
   name: {
