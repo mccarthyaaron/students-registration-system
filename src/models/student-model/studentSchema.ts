@@ -10,16 +10,6 @@ type Gender = (typeof genderOptions)[number];
 type Grade = (typeof gradeOptions)[number];
 type ResidentialStatus = (typeof residentialOptions)[number];
 
-export interface ParentInfo {
-  name: string;
-  gender: Gender;
-  email: string;
-  primaryContact: string;
-  contact2: string;
-  physicalAddress1: string;
-  physicalAddress2?: string;
-}
-
 export interface StudentInfo {
   name: {
     surname: string;
@@ -30,39 +20,17 @@ export interface StudentInfo {
   gender: Gender;
   grade: Grade;
   residentialStatus: ResidentialStatus;
-  // parents: Array<mongoose.Types.ObjectId>;
-  parents: Array<Parent>;
+  parents: Array<{
+    name: string;
+    relationship: string;
+    gender: Gender;
+    email: string;
+    primaryContact: string;
+    contact2?: string;
+    physicalAddress1: string;
+    physicalAddress2?: string;
+  }>;
 }
-interface Parent extends ParentInfo {
-  _id: mongoose.Types.ObjectId;
-}
-
-const parentSchema = new mongoose.Schema<ParentInfo>({
-  name: { type: String, required: [true, 'Parent schema required a name for the parent'] },
-  // students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Child' }],
-  gender: {
-    type: String,
-    required: [true, 'Parent schema requires a gender value'],
-    enum: {
-      values: genderOptions,
-      message: `Parent schema: parent gender value {VALUE} is none of ${genderOptions}`,
-    },
-  },
-  primaryContact: {
-    type: String,
-    required: [true, 'Parent schema requires a value for the primary Contact'],
-  },
-  contact2: String,
-  email: {
-    type: String,
-    validate: {
-      validator: (email: string) => email.match(emailRegEx),
-      message: 'Parent Schema: {VALUE} is not a valid email address',
-    },
-  },
-  physicalAddress1: { type: String, required: [true, 'Parent schema requires a physical address for a parent'] },
-  physicalAddress2: String,
-});
 
 const studentSchema = new mongoose.Schema<StudentInfo>({
   name: {
@@ -101,9 +69,37 @@ const studentSchema = new mongoose.Schema<StudentInfo>({
       message: `Student schema: student residence value {VALUE} is none of ${residentialOptions}`,
     },
   },
-  // parents: [String],
-  parents: [parentSchema],
+  parents: [
+    {
+      name: { type: String, required: [true, 'Student schema requires a name for the parent'] },
+      relationship: {
+        type: String,
+        required: [true, 'Student schema: relationship of the parent with the child is not defined'],
+      },
+      gender: {
+        type: String,
+        required: [true, 'Student schema requires a gender value'],
+        enum: {
+          values: genderOptions,
+          message: `Student schema: parent gender value {VALUE} is none of ${genderOptions}`,
+        },
+      },
+      primaryContact: {
+        type: String,
+        required: [true, 'Student schema requires a value for the primary Contact'],
+      },
+      contact2: String,
+      email: {
+        type: String,
+        validate: {
+          validator: (email: string) => email.match(emailRegEx),
+          message: 'Student schema: {VALUE} is not a valid email address',
+        },
+      },
+      physicalAddress1: { type: String, required: [true, 'Student schema requires a physical address for a parent'] },
+      physicalAddress2: String,
+    },
+  ],
 });
 
-export const ParentModel = mongoose.model('Parent', parentSchema);
 export const StudentModel = mongoose.model('Student', studentSchema);
