@@ -3,6 +3,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 import 'colors';
 import { StudentModel } from '../models/student-model/studentSchema.ts';
+import { EnrollmentModel } from '../models/enrollment-model/enrollmentModel.ts';
+import {
+  PaymentMethodModel,
+  StudentBillingItemModel,
+  StudentBillingModel,
+  StudentPaymentModel,
+} from '../models/studentTransactionModel/studentTransactionSchema.ts';
 
 const localDbUri = process.env.MONGODB_LOCAL_URI;
 
@@ -30,5 +37,12 @@ export async function connectToLocalDB() {
 
 export async function initialiseLocalDb() {
   await connectToLocalDB();
-  process.env.NODE_ENV === 'development' && (await StudentModel.init());
+  if (process.env.NODE_ENV === 'development') {
+    await StudentModel.init();
+    await EnrollmentModel.init();
+    await StudentBillingModel.init();
+    await StudentBillingItemModel.init();
+    await StudentPaymentModel.init();
+    await PaymentMethodModel.init();
+  }
 }
