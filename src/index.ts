@@ -2,35 +2,12 @@ import express from 'express';
 import 'colors';
 import dotenv from 'dotenv';
 dotenv.config();
-import studentsRouter from './routes/studentsRouter.ts';
+import studentsRouter from './routes/student-routes/studentsRouter.ts';
 import { checkDataField, genericErrorMiddleware } from './middleware/errorHandling.ts';
-import { createStudent } from './models/student-model/studentModel.ts';
 import { initialiseLocalDb } from './config/config.ts';
 
 initialiseLocalDb();
 
-createStudent({
-  name: {
-    surname: 'Juuko',
-    firstName: 'Carlton',
-    // lastName: 'Hannah',
-  },
-  dateOfBirth: new Date('2017/7/13'),
-  gender: 'MALE',
-  grade: 'KG3',
-  residentialStatus: 'DAY',
-  parents: [
-    {
-      name: 'Mutebi Daianah',
-      relationship: 'Mother',
-      gender: 'FEMALE',
-      primaryContact: '0756-735566',
-      contact2: '0756-734545',
-      email: 'diana@gmail.com',
-      physicalAddress1: 'Entebbe, Virus',
-    },
-  ],
-});
 const app = express();
 
 app.use(express.json());

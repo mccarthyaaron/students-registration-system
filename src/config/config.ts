@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import 'colors';
 import { StudentModel } from '../models/student-model/studentSchema.ts';
-import { EnrollmentModel } from '../models/enrollment-model/enrollmentModel.ts';
+import { EnrollmentModel } from '../models/enrollment-model/enrollmentSchema.ts';
 import {
   PaymentMethodModel,
   StudentBillingItemModel,

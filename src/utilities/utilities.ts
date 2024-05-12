@@ -1,4 +1,4 @@
-export const createFetchResponseBody = (data: any) => {
+const createFetchResponseBody = (data: any) => {
   return {
     data,
   };
