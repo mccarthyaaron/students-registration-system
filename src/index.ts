@@ -4,10 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 import studentsRouter from './routes/student-routes/studentsRouter.ts';
 import { checkDataField, genericErrorMiddleware } from './middleware/errorHandling.ts';
-import { initialiseLocalDb } from './config/config.ts';
+import { connectToLocalDB } from './config/config.ts';
 
-initialiseLocalDb();
-
+const client = await connectToLocalDB();
 const app = express();
 
 app.use(express.json());
