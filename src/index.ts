@@ -4,9 +4,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 import studentsRouter from './routes/student-routes/studentsRouter.ts';
 import { checkDataField, genericErrorMiddleware } from './middleware/errorHandling.ts';
-import { connectToLocalDB } from './config/config.ts';
+import { connectToAtlasLearningDB, connectToLocalDB } from './config/config.ts';
 
-const client = await connectToLocalDB();
+// const client = await connectToLocalDB();
+const client = await connectToAtlasLearningDB();
+
 const app = express();
 
 app.use(express.json());
