@@ -1,6 +1,6 @@
-import express from 'express';
+import { type ErrorRequestHandler, type Request, type Response, type NextFunction } from 'express';
 
-export const genericErrorMiddleware: express.ErrorRequestHandler = (error, req, res, next) => {
+export const genericErrorMiddleware: ErrorRequestHandler = (error, req, res, next) => {
   if (res.headersSent) {
     return next(error);
   }
@@ -15,7 +15,7 @@ export function createErrorResponseBody(error: Error) {
   };
 }
 
-export function checkDataField(req: express.Request, res: express.Response, next: express.NextFunction) {
+export function checkDataField(req: Request, res: Response, next: NextFunction) {
   if (req.method === 'POST' || req.method === 'PUT') {
     if (!req.body.data) {
       res.status(400).json(createErrorResponseBody(Error('Request body should have a data field')));

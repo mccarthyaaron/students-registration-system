@@ -1,9 +1,9 @@
-import express from 'express';
+import { type Request, type Response, type NextFunction } from 'express';
 import { createErrorResponseBody } from '../../middleware/errorHandling.ts';
-import { StudentInfo } from '../../models/student-model/studentSchema.ts';
+import { type StudentInfo } from '../../models/student-model/studentSchema.ts';
 import { createStudent, fetchAllStudents, findStudentById } from '../../models/student-model/studentModels.ts';
 
-export const getStudents = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+export const getStudents = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const students = await fetchAllStudents();
     res.status(200).json({ results: students });
@@ -12,7 +12,7 @@ export const getStudents = async (req: express.Request, res: express.Response, n
   }
 };
 
-export const getStudent = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+export const getStudent = async (req: Request, res: Response, next: NextFunction) => {
   const studentId = req.params.studentId;
   if (!studentId) {
     throw Error('student id not given');
@@ -29,7 +29,7 @@ export const getStudent = async (req: express.Request, res: express.Response, ne
   }
 };
 
-export const postStudent = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+export const postStudent = async (req: Request, res: Response, next: NextFunction) => {
   const studentInformation: StudentInfo = req.body.data;
 
   if (!studentInformation || typeof studentInformation !== 'object') {

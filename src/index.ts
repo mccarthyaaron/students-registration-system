@@ -2,9 +2,9 @@ import express from 'express';
 import 'colors';
 import dotenv from 'dotenv';
 dotenv.config();
-import studentsRouter from './routes/student-routes/studentsRouter.ts';
-import { checkDataField, genericErrorMiddleware } from './middleware/errorHandling.ts';
-import { connectToAtlasLearningDB, connectToLocalDB } from './config/config.ts';
+import studentsRouter from './routes/student-routes/studentsRouter';
+import { checkDataField, genericErrorMiddleware } from './middleware/errorHandling';
+import { connectToAtlasLearningDB, connectToLocalDB } from './config/config';
 
 // const client = await connectToLocalDB();
 const client = await connectToAtlasLearningDB();

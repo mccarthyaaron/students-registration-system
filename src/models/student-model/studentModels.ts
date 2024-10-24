@@ -1,4 +1,4 @@
-import { StudentInfo, StudentModel } from './studentSchema.ts';
+import { type StudentInfo, StudentModel } from './studentSchema';
 
 export const createStudent = async (studentInfo: StudentInfo) => {
   const student = await StudentModel.create(studentInfo);
