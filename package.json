@@ -9,8 +9,6 @@
   "scripts": {
     "start:dev": "nodemon --watch ./src --ext ts,js --exec \"yarn run tsx\" ",
     "tsx": "tsx ./src/index.ts",
-    "prettier": "prettier --write src/**/*.ts",
-    "lint": "eslint src --ext ts,js --fix --max-warnings=0",
     "postinstall": "husky install",
     "prepare": "husky"
   },
@@ -35,7 +33,8 @@
     "typescript": "^5.4.2"
   },
   "lint-staged": {
-    "*.{js,ts}": "eslint --cache --fix"
+    "src/**/*.{js,ts}": "eslint --cache --fix --max-warnings=0",
+    "*.{js,ts}": "prettier --write --list-different"
   },
   "packageManager": "yarn@4.3.0"
 }
